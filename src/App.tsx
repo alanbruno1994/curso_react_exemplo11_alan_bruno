@@ -1,24 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import useMyFetch from './hooks/my_fetch';
 
 function App() {
+  const [cep,setCEP]=useState('')
+  const city=useMyFetch(cep)//Qaundo o estado do hook mudar vai gerar novos dados e vai atualizar o componente
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input type='text' value={cep} onChange={event=>setCEP(event.target.value)} />
+      <p>{city?.city}-{city?.uf}-{city?.district}</p>
     </div>
   );
 }
